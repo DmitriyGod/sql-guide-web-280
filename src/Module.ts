@@ -7,7 +7,7 @@ export class Module implements ClassComponent<HTMLDivElement> {
     constructor (
         readonly moduleName: string,
         readonly subModules: ModuleTopicNav[],
-        readonly page: () => Promise<Page>,
+        readonly page: () => Page,
     ) {}
     mount(): HTMLDivElement {
         return l('div', _ => {
@@ -17,7 +17,7 @@ export class Module implements ClassComponent<HTMLDivElement> {
             
             l(_, new ModuleNav(this.moduleName, this.subModules))
             
-            this.page().then(p => l(_, p))
+            l(_, this.page())
     })
 }
 }

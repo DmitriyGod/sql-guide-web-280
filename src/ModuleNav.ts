@@ -9,6 +9,7 @@ export class ModuleNav implements ClassComponent<HTMLDivElement> {
         readonly moduleName: string,
         readonly subModules: ModuleTopicNav[]
     ) {}
+    
     mount(): HTMLDivElement {
         return l('div', _ => {
             css`
@@ -94,6 +95,7 @@ export class ModuleNav implements ClassComponent<HTMLDivElement> {
                         })
                     })
 
+                    console.log('xxx', this.subModules)
                     let selectedSubModuleName = this.subModules[0].name
                     
                     lz(_, 'div', (_, z) => {

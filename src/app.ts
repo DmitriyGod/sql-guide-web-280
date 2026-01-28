@@ -34,14 +34,14 @@ class NavbarLinks implements ClassComponent<HTMLDivElement> {
 
             l(_, 'a', _ => {
                 _.href = '#/about'
-                _.innerText = 'О курсе'
+                _.innerText = 'О курсе!!'
                 // _.onclick = () => {
                 //     MenuCloser(_)
                 // }
             })
             l(_, 'a', _ => {
                 _.href = '#/modules'
-                _.innerText = 'Список модулей'
+                _.innerText = 'Список модулей!!'
                 // _.onclick = () => {
                 //     MenuCloser(_)
                 // }
@@ -49,8 +49,7 @@ class NavbarLinks implements ClassComponent<HTMLDivElement> {
         })
     }
 }
-const GS = new GuideStructure
-await GS.init()
+const GS = new GuideStructure()
 
 const ui = l('div', _ => {
 
@@ -118,15 +117,22 @@ const ui = l('div', _ => {
                 console.log(current.slice(0, current.lastIndexOf('/')))
                 const subModule = GS.guideStructure.get(current)
                 console.log(GS.navModuleMap)
-                console.log(subModule)
+                console.log('submodule:', subModule)
                 GS.modules.forEach(v => console.log(v))
                 const moduleName = GS.modules.get(current.slice(0, current.lastIndexOf('/')))
 
+                
+
                 if (subModule) {
+                    console.log('aaa', GS.guideStructure)
+                    console.log('bbb', GS.navModuleMap)
+                    console.log('zzz', subModule.name!)
+                    console.log('yyy', GS.navModuleMap.get(subModule.name!)!)
                     l(_, new Module(
                         moduleName!, 
                         GS.navModuleMap.get(subModule.name!)!,
-                        subModule.page))
+                        subModule.page
+                    ))
                 } else {
                     window.location.href = linkToAbout
                 }
