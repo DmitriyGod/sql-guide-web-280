@@ -1,5 +1,5 @@
 import { l } from "../../lib";
 
-export const modules_page = l('div', _ => {
+export const modules_page = (_: HTMLDivElement) => {
     _.innerText = 'modules lit'
-})
+}

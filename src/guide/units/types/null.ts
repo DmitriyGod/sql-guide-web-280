@@ -1,5 +1,5 @@
 import { l } from "../../../lib";
 
-export const nulls = l('div', _ => {
-    
-})
+export const nulls = (_: HTMLDivElement) => {
+
+}

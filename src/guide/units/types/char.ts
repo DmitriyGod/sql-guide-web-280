@@ -1,5 +1,5 @@
 import { l } from "../../../lib";
 
-export const char = l('div', _ => {
-    
-})
+export const char = (_: HTMLDivElement) => {
+
+}

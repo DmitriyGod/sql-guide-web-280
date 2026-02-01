@@ -1,5 +1,5 @@
 import { l } from "../../../lib";
 
-export const enums = l('div', _ => {
-    
-})
+export const enums = (_: HTMLDivElement) => {
+
+}

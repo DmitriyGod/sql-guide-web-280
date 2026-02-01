@@ -1,5 +1,5 @@
 import { l } from "../../../lib";
 
-export const time = l('div', _ => {
-    
-})
+export const time = (_: HTMLDivElement) => {
+
+}

@@ -1,6 +1,4 @@
-// import { setError } from "./uikit/ErrorBox"
 
-import { setError } from "./uikit/ErrorBox"
 
 export function css(str: any, ...args: any): Css {
     args[0] // unused
@@ -178,64 +176,64 @@ export function sync(
 }
 
 
-type Reponse<T> =
-    {
-        isOk: true,
-        value: T
-    } | {
-        isOk: false,
-        error: {
-            kind: string,
-            message: string,
-        }
-    }
+// type Reponse<T> =
+//     {
+//         isOk: true,
+//         value: T
+//     } | {
+//         isOk: false,
+//         error: {
+//             kind: string,
+//             message: string,
+//         }
+//     }
 
 
-export async function apiCall<T>(path: string, args: any): Promise<T> {
-    const resp = await window.fetch('/api' + path,
-        args instanceof FormData ? {
-            method: "POST",
-            body: args,
-        } : {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(args),
-        }
-    )
+// export async function apiCall<T>(path: string, args: any): Promise<T> {
+//     const resp = await window.fetch('/api' + path,
+//         args instanceof FormData ? {
+//             method: "POST",
+//             body: args,
+//         } : {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify(args),
+//         }
+//     )
 
-    if (resp.status == 401) {
-        window.location.hash = '#/login'
-        return null as unknown as Promise<T> // FIXME: return 'unauth error'
-    }
+//     if (resp.status == 401) {
+//         window.location.hash = '#/login'
+//         return null as unknown as Promise<T> // FIXME: return 'unauth error'
+//     }
 
-    if (resp.status != 200) setError(
-        'Ошибка соединения с сервером. Не все данные сохранены. Обновите страницу'
-    )
+//     if (resp.status != 200) setError(
+//         'Ошибка соединения с сервером. Не все данные сохранены. Обновите страницу'
+//     )
 
-    const body = await resp.json() as Reponse<T>
+//     const body = await resp.json() as Reponse<T>
 
-    switch (body.isOk) {
-        case true:
-            return body.value
-        case false:
-            setError(
-                'Ошибка обработки запроса: ' + body.error.message +
-                '. Не все данные сохранены. Обновите страницу'
-            )
-            throw new Error(body.error.message)
-    }
-}
+//     switch (body.isOk) {
+//         case true:
+//             return body.value
+//         case false:
+//             setError(
+//                 'Ошибка обработки запроса: ' + body.error.message +
+//                 '. Не все данные сохранены. Обновите страницу'
+//             )
+//             throw new Error(body.error.message)
+//     }
+// }
 
-export function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(
-    callback: T, delay: number = 500
-): (...args: Parameters<T>) => void {
+// export function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(
+//     callback: T, delay: number = 500
+// ): (...args: Parameters<T>) => void {
 
-    let timer: number | null = null
+//     let timer: number | null = null
 
-    return function (this: ThisParameterType<T>, ...args: Parameters<T>): void {
-        if (timer != null) clearTimeout(timer)
-        timer = setTimeout(() => { callback.apply(this, args) }, delay)
-    }
-}
+//     return function (this: ThisParameterType<T>, ...args: Parameters<T>): void {
+//         if (timer != null) clearTimeout(timer)
+//         timer = setTimeout(() => { callback.apply(this, args) }, delay)
+//     }
+// }

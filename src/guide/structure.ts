@@ -1,5 +1,5 @@
 import type { ModuleTopicNav } from "../ModuleNav";
-import { Page } from "../Page";
+import { Page } from "../paper-components/Page";
 import { about } from "./units/about";
 import { modules_page } from "./units/modules";
 import { char } from "./units/types/char";
@@ -39,14 +39,14 @@ export class GuideStructure {
         //create navbar map
         this.modules.forEach((v, k) => {
             const topics: ModuleTopicNav[] = []
-            console.log(k, v)
+            // console.log(k, v)
             this.guideStructure.forEach((pd, topicRoute) => {
                 if (topicRoute.startsWith(k)) {
                     topics.push({ name: pd.name!, link: topicRoute })
                 }
             })
-            console.log('eee', this.modules.get(k)!)
-            this.navModuleMap.set(this.modules.get(k)!, topics)
+            // console.log('eee', this.modules.get(k)!)
+            this.navModuleMap.set(v, topics)
         })
     }
 }

@@ -1,19 +1,20 @@
 
-import { linkToModules } from "./guide/structure";
-import { css, l, lz, sync, type ClassComponent } from "./lib";
+import { linkToModules } from "../guide/structure";
+import { css, l, lz, sync, type ClassComponent } from "../lib";
 
-export type ModuleTopicNav = {name: string, link: string}
+export type ModuleTopic = {name: string, link: string}
 
-export class ModuleNav implements ClassComponent<HTMLDivElement> {
+export class ModuleTopicNav implements ClassComponent<HTMLDivElement> {
     constructor (
         readonly moduleName: string,
-        readonly subModules: ModuleTopicNav[]
+        readonly selectedTopicName: string,
+        readonly subTopics: ModuleTopic[]
     ) {}
     
     mount(): HTMLDivElement {
         return l('div', _ => {
             css`
-                width: 350px;
+                align-self: flex-start;
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
@@ -55,7 +56,7 @@ export class ModuleNav implements ClassComponent<HTMLDivElement> {
                                 font-family: "Golos Text", regular;
                                 font-size: 18px;
                                 font-weight: 600;
-                                color: #005143;
+                                color: var(--base-color-dark-green);
                                 line-height: 1.24;
                                 `.apply(_)
                                 
@@ -67,7 +68,7 @@ export class ModuleNav implements ClassComponent<HTMLDivElement> {
 
             l(_, 'div', _ => {
                 css`
-                    background: #F7F7F7;
+                    background: var(--base-color-backgound-gray);
                     border-radius: 10px;`.apply(_)
                     
                 l(_, 'div', _ => {
@@ -88,15 +89,14 @@ export class ModuleNav implements ClassComponent<HTMLDivElement> {
                                 font-family: "Golos Text", regular;
                                 font-size: 18px;
                                 font-weight: 500;
-                                color: #005143;
+                                color: var(--base-color-dark-green);
                                 line-height: 1.24;
                                 `.apply(_)
                             _.innerText = this.moduleName
                         })
                     })
 
-                    console.log('xxx', this.subModules)
-                    let selectedSubModuleName = this.subModules[0].name
+                    // console.log('xxx', this.subModules)
                     
                     lz(_, 'div', (_, z) => {
                         css`
@@ -104,10 +104,9 @@ export class ModuleNav implements ClassComponent<HTMLDivElement> {
                             flex-direction: column;
                             gap: 6px;`.apply(_)
 
-                        this.subModules.forEach(sm => {
+                        this.subTopics.forEach(sm => {
                             l(_, 'a', _ => {
                                 _.href = sm.link
-                                _.onclick = () => sync([z], selectedSubModuleName = sm.name)
 
                                 css`
                                     text-decoration: none;
@@ -123,18 +122,18 @@ export class ModuleNav implements ClassComponent<HTMLDivElement> {
                                         padding-right: 12px;
                                         `.apply(_)
                                     
-                                    if (selectedSubModuleName == sm.name) {
+                                    if (this.selectedTopicName == sm.name) {
                                         css`
                                             background: #ECFBF9;
-                                            border: solid #005143 1px;
+                                            border: solid var(--base-color-dark-green) 1px;
                                             &>p {
-                                                color: #005143;
+                                                color: var(--base-color-dark-green);
                                             }`.apply(_)
                                     } else {
                                         css`
                                             background: #ECECEC;
                                             &>p {
-                                                color: #001F19;
+                                                color: var(--base-color-black);
                                             }`
                                             .apply(_)
                                     }

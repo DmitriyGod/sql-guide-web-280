@@ -1,5 +1,5 @@
-import  { l } from "../../../lib";
+import { l } from "../../../lib";
 
-export const digits = l('div', _ => {
-    
-})
+export const digits = (_: HTMLDivElement) => {
+
+}
